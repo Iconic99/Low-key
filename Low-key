@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low-Key Drop</title>
+    <style>
+        /* Reset and body styling */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Rotating Logo */
+        .logo {
+            font-size: 3em;
+            font-weight: bold;
+            animation: rotate 5s infinite linear;
+        }
+
+        @keyframes rotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        /* Password Section */
+        .password-section {
+            margin: 20px 0;
+        }
+
+        input[type="password"] {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #111;
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Join Waitlist Button */
+        .waitlist-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #fff;
+            color: #111;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+
+        .countdown div {
+            display: inline-block;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Rotating Brand Name -->
+    <div class="logo">Low-Key</div>
+
+    <!-- Password Entry Section -->
+    <div class="password-section">
+        <input type="password" placeholder="Password">
+        <button>Enter</button>
+    </div>
+
+    <!-- Join Waitlist Button -->
+    <button class="waitlist-button">Join Waitlist for Password</button>
+    <p>**Drops are only accessible with password**</p>
+
+    <!-- Countdown Timer -->
+    <div class="countdown">
+        <div><span id="days">6</span> Days</div>
+        <div><span id="hours">6</span> Hrs</div>
+        <div><span id="minutes">32</span> Min</div>
+        <div><span id="seconds">1</span> Sec</div>
+    </div>
+
+    <!-- Countdown Script -->
+    <script>
+        // Example countdown timer logic
+        const countdownDate = new Date().getTime() + 6 * 24 * 60 * 60 * 1000; // 6 days from now
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            // Calculations for days, hours, minutes, and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Displaying the result in the HTML
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+
+            // Update countdown every second
+            if (distance > 0) {
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+
+        updateCountdown();
+    </script>
+</body>
+</html>
